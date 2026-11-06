@@ -11,13 +11,46 @@
 
     <div id="animation-area"></div>
 
-    <script>
-        fetch("ball.svg")
-            .then(response => response.text())
-            .then(svgText => {
-                document.getElementById("animation-area").innerHTML = svgText;
-            });
-    </script>
+   
+<script>
+    fetch("ball.svg")
+        .then(response => response.text())
+        .then(svgText => {
+
+            document.getElementById("animation-area").innerHTML = svgText;
+
+            const ball = document.getElementById("ball1");
+
+            let startTime = null;
+
+            function animate(timestamp) {
+
+                if (!startTime) {
+                    startTime = timestamp;
+                }
+
+                const elapsed = (timestamp - startTime) % 1500;
+                const progress = elapsed / 1500;
+
+                let y = 0;
+
+                if (progress < 0.4) {
+                    const t = progress / 0.4;
+                    y = 178 * t * t;
+                } else {
+                    const t = (progress - 0.4) / 0.6;
+                    y = 178 - 108 * (1 - (1 - t) * (1 - t));
+                }
+
+                ball.setAttribute("cy", 100 + y);
+
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        });
+</script>
+
 
 </body>
 </html>
