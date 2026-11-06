@@ -26,39 +26,57 @@
             height: auto;
         }
 
-        /* 左の羽 */
-        #left_Feather {
-            transform-box: view-box;
-            transform-origin: 282px 185px;
-            animation: leftFlap 1s ease-in-out infinite alternate;
-        }
+       
+/* =========================================
+   左の羽
+========================================= */
 
-        /* 右の羽 */
-        #right_Feather {
-            transform-box: view-box;
-            transform-origin: 317px 185px;
-            animation: rightFlap 1s ease-in-out infinite alternate;
-        }
+#left_Feather {
+    transform-box: view-box;
+    transform-origin: 280.31px 188.68px;
 
-        @keyframes leftFlap {
-            from {
-                transform: rotate(0deg);
-            }
+    animation:
+        leftFlap 1s ease-in-out infinite alternate;
+}
 
-            to {
-                transform: rotate(-35deg);
-            }
-        }
 
-        @keyframes rightFlap {
-            from {
-                transform: rotate(0deg);
-            }
+/* =========================================
+   右の羽
+========================================= */
 
-            to {
-                transform: rotate(35deg);
-            }
-        }
+#right_Feather {
+    transform-box: view-box;
+    transform-origin: 319.69px 188.68px;
+
+    animation:
+        rightFlap 1s ease-in-out infinite alternate;
+}
+
+
+/* =========================================
+   羽ばたきアニメーション
+========================================= */
+
+@keyframes leftFlap {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes rightFlap {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-25deg);
+    }
+}
+
     </style>
 </head>
 
