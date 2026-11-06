@@ -15,3 +15,38 @@ body {
     height: 400px;
     display: block;
 }
+
+
+/* ボールの落下・跳ね返り */
+#ball {
+    transform-box: view-box;
+    animation: bounce 1.5s ease-in infinite;
+}
+
+@keyframes bounce {
+
+    /* 最初：上にいる */
+    0% {
+        transform: translateY(0);
+    }
+
+    /* 落下 */
+    35% {
+        transform: translateY(177px);
+    }
+
+    /* 地面に接触 */
+    40% {
+        transform: translateY(177px);
+    }
+
+    /* 跳ね返る */
+    65% {
+        transform: translateY(70px);
+    }
+
+    /* 再び落下 */
+    100% {
+        transform: translateY(177px);
+    }
+}
