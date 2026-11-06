@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第3回 花の線画アニメーション</title>
+    <title>第4回 蝶の羽ばたき</title>
 
     <style>
         body {
@@ -16,30 +16,47 @@
             background: #f8f8f8;
         }
 
-        #flower-container {
+        #butterfly-container {
             width: min(600px, 100%);
         }
 
-        #flower-svg {
+        #butterfly-svg {
             display: block;
             width: 100%;
             height: auto;
         }
 
-        #flower-svg path {
-            stroke: #000;
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        /* 左の羽 */
+        #left_Feather {
+            transform-box: view-box;
+            transform-origin: 282px 185px;
+            animation: leftFlap 1s ease-in-out infinite alternate;
         }
 
-        #flower-svg path.is-drawing {
-            animation: draw 6s ease forwards;
+        /* 右の羽 */
+        #right_Feather {
+            transform-box: view-box;
+            transform-origin: 317px 185px;
+            animation: rightFlap 1s ease-in-out infinite alternate;
         }
 
-        @keyframes draw {
+        @keyframes leftFlap {
+            from {
+                transform: rotate(0deg);
+            }
+
             to {
-                stroke-dashoffset: 0;
+                transform: rotate(-35deg);
+            }
+        }
+
+        @keyframes rightFlap {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(35deg);
             }
         }
     </style>
@@ -47,14 +64,15 @@
 
 <body>
 
-    <div id="flower-container"></div>
+    <div id="butterfly-container"></div>
 
     <script>
-        fetch("名称未設定-1.svg")
+        fetch("butterfly.svg")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("SVGファイルを読み込めませんでした");
                 }
+
                 return response.text();
             })
             .then(svgText => {
@@ -68,26 +86,13 @@
 
                 const svg = svgDocument.documentElement;
 
-                svg.setAttribute("id", "flower-svg");
+                svg.setAttribute("id", "butterfly-svg");
 
                 document
-                    .getElementById("flower-container")
+                    .getElementById("butterfly-container")
                     .appendChild(
                         document.importNode(svg, true)
                     );
-
-                const flowerPath = document.querySelector(
-                    "#flower-svg path"
-                );
-
-                const length = flowerPath.getTotalLength();
-
-                flowerPath.style.strokeDasharray = length;
-                flowerPath.style.strokeDashoffset = length;
-
-                requestAnimationFrame(() => {
-                    flowerPath.classList.add("is-drawing");
-                });
 
             })
             .catch(error => {
