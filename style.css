@@ -19,47 +19,11 @@ body {
 
 
 
-/* ボールの落下・跳ね返り */
+
+/* ボールのアニメーション */
 #ball1 {
-    transform-box: fill-box;
-    transform-origin: center;
-    -webkit-animation: bounce 1.5s ease-in infinite;
-    animation: bounce 1.5s ease-in infinite;
+    transform: none;
+    -webkit-transform: none;
 }
 
-@-webkit-keyframes bounce {
-    0% {
-        -webkit-transform: translateY(0);
-    }
-
-    35%, 40% {
-        -webkit-transform: translateY(178px);
-    }
-
-    65% {
-        -webkit-transform: translateY(70px);
-    }
-
-    100% {
-        -webkit-transform: translateY(178px);
-    }
-}
-
-@keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-
-    35%, 40% {
-        transform: translateY(178px);
-    }
-
-    65% {
-        transform: translateY(70px);
-    }
-
-    100% {
-        transform: translateY(178px);
-    }
-}
 
