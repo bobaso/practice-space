@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="butterfly" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 600 400">
+  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #ff0;
+      }
+
+      .st1 {
+        fill: #ff9600;
+      }
+    </style>
+  </defs>
+  <ellipse id="body" class="st1" cx="300" cy="200" rx="26.94" ry="110.9"/>
+  <path id="right_Feather" class="st0" d="M319.69,188.68c3.24,10.5,24.55,120.13,63.08,133.73,45.48,16.05,41.41-99.17,60.09-137.21,20.35-41.44,13.2-82.64-8.85-93.54-24.43-12.07-59.34-9.36-70.31-.64-16.59,13.18-56.83,56.17-44,97.65Z"/>
+  <path id="right_antennae" class="st1" d="M305.87,99.99s3.14-17.26,16.22-25.11"/>
+  <path id="left_Feather" class="st0" d="M280.31,188.68c-3.24,10.5-24.55,120.13-63.08,133.73-45.48,16.05-41.41-99.17-60.09-137.21-20.35-41.44-13.2-82.64,8.85-93.54,24.43-12.07,59.34-9.36,70.31-.64,16.59,13.18,56.83,56.17,44,97.65Z"/>
+  <path id="left_antennae" class="st1" d="M294.13,99.99s-3.14-17.26-16.22-25.11"/>
+</svg>
