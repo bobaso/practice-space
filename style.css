@@ -17,33 +17,33 @@ body {
 }
 
 
+
 /* ボールの落下・跳ね返り */
 #ball {
-    transform-box: view-box;
     animation: bounce 1.5s ease-in infinite;
+    will-change: transform;
 }
-
 
 @keyframes bounce {
 
     0% {
-        transform: translateY(0);
+        transform: translate(0, 0);
     }
 
     35% {
-        transform: translateY(174px);
+        transform: translate(0, 174px);
     }
 
     40% {
-        transform: translateY(174px);
+        transform: translate(0, 174px);
     }
 
     65% {
-        transform: translateY(70px);
+        transform: translate(0, 70px);
     }
 
     100% {
-        transform: translateY(174px);
+        transform: translate(0, 174px);
     }
 }
 
