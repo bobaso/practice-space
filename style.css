@@ -1,0 +1,17 @@
+
+body {
+    margin: 0;
+    background: #eeeeee;
+}
+
+#animation-area {
+    width: 600px;
+    height: 400px;
+    margin: 30px auto;
+}
+
+#animation-area svg {
+    width: 600px;
+    height: 400px;
+    display: block;
+}
