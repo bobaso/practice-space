@@ -18,32 +18,48 @@ body {
 
 
 
+
 /* ボールの落下・跳ね返り */
-#ball {
+#ball1 {
+    transform-box: fill-box;
+    transform-origin: center;
+    -webkit-animation: bounce 1.5s ease-in infinite;
     animation: bounce 1.5s ease-in infinite;
-    will-change: transform;
 }
 
-@keyframes bounce {
-
+@-webkit-keyframes bounce {
     0% {
-        transform: translate(0, 0);
+        -webkit-transform: translateY(0);
     }
 
-    35% {
-        transform: translate(0, 174px);
-    }
-
-    40% {
-        transform: translate(0, 174px);
+    35%, 40% {
+        -webkit-transform: translateY(178px);
     }
 
     65% {
-        transform: translate(0, 70px);
+        -webkit-transform: translateY(70px);
     }
 
     100% {
-        transform: translate(0, 174px);
+        -webkit-transform: translateY(178px);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    35%, 40% {
+        transform: translateY(178px);
+    }
+
+    65% {
+        transform: translateY(70px);
+    }
+
+    100% {
+        transform: translateY(178px);
     }
 }
 
