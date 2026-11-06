@@ -3,12 +3,12 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SVG Animation Practice 01</title>
+<title>SVG Animation Practice 02</title>
 
-    <style>
+<style>
 
 /* =================================
    ページ全体
@@ -27,65 +27,204 @@ body {
 
 
 /* =================================
-   アニメーション表示エリア
+   表示エリア
 ================================= */
 
 .animation-area {
     width: 600px;
     max-width: 100%;
-    aspect-ratio: 3 / 2;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
 /* =================================
-   SVG風船
+   SVG
 ================================= */
 
-.balloon {
+.flower-svg {
     width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    animation: float 3s ease-in-out infinite;
+    height: auto;
 }
 
 
 /* =================================
-   上下に浮かぶアニメーション
+   花びらの開花アニメーション
 ================================= */
 
-@keyframes float {
+.petal {
+    transform-box: view-box;
+
+    transform-origin:
+        53.575% 42.8625%;
+
+    animation: bloom 1s ease-out both;
+}
+
+#petal-01 {
+    animation-delay: 0.2s;
+}
+
+#petal-02 {
+    animation-delay: 0.4s;
+}
+
+#petal-03 {
+    animation-delay: 0.6s;
+}
+
+#petal-04 {
+    animation-delay: 0.8s;
+}
+
+#petal-05 {
+    animation-delay: 1s;
+}
+
+
+/* =================================
+   花びらが開く
+================================= */
+
+@keyframes bloom {
+
+    0% {
+        transform: scale(0.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =================================
+   花の中心
+================================= */
+
+#flower-center {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation: center-appear 0.5s ease-out 1.5s both;
+}
+
+@keyframes center-appear {
+
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =================================
+   花全体の揺れ
+================================= */
+
+#flower-head {
+    transform-box: view-box;
+    transform-origin: 53.575% 42.8625%;
+
+    animation: sway 3s ease-in-out 2s infinite;
+}
+
+@keyframes sway {
 
     0%, 100% {
-        transform: translateY(0);
+        transform: rotate(0deg);
     }
 
     50% {
-        transform: translateY(-30px);
+        transform: rotate(3deg);
     }
 
 }
 
-    </style>
-
+</style>
 </head>
+
 
 <body>
 
-    <div class="animation-area">
+<div class="animation-area">
 
-        <img
-            src="balloon.svg"
-            alt="赤い風船"
-            class="balloon">
+<svg
+    class="flower-svg"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 600 400">
 
-    </div>
+    <!-- 茎 -->
+    <path
+        id="stem"
+        fill="none"
+        stroke="#65a879"
+        stroke-width="1"
+        d="M317.75,181.07s31.5,94.16,14.24,137.06-19.83,52.84-19.83,52.84"/>
+
+
+    <!-- 葉 -->
+    <g id="leaves" fill="#65a879">
+
+        <path
+            d="M294.6,272.09s-19.59,27.73,3.43,43.42,28.25,24.06,28.25,24.06c0,0-4.76-45.51-31.68-67.48Z"/>
+
+        <path
+            d="M370.98,290.38s10.76,32.2-15.81,40.58-33.99,14.89-33.99,14.89c0,0,17.69-42.2,49.8-55.47Z"/>
+
+    </g>
+
+
+    <!-- 花全体 -->
+    <g id="flower-head">
+
+        <!-- 花びら -->
+        <g fill="#f28ba8">
+
+            <path
+                id="petal-01"
+                class="petal"
+                d="M259.91,213.12c23.1,46.45,65.04-15.88,54.18-31.63s-68.49,2.84-54.18,31.63Z"/>
+
+            <path
+                id="petal-02"
+                class="petal"
+                d="M321.13,98.05c-51.54-5.88-22.06,63.21-2.93,62.67,19.12-.55,34.87-59.02,2.93-62.67Z"/>
+
+            <path
+                id="petal-03"
+                class="petal"
+                d="M389.38,144.48c-15.43-49.53-66.74,5.34-58.51,22.62,8.22,17.28,68.07,8.07,58.51-22.62Z"/>
+
+            <path
+                id="petal-04"
+                class="petal"
+                d="M361.19,233.15c46.37-23.25-16.08-64.99-31.8-54.08-15.72,10.91,3.06,68.48,31.8,54.08Z"/>
+
+            <path
+                id="petal-05"
+                class="petal"
+                d="M248.94,139.82c-24.11,45.93,50.96,43.41,57.37,25.39,6.4-18.03-42.42-53.85-57.37-25.39Z"/>
+
+        </g>
+
+
+        <!-- 花の中心 -->
+        <circle
+            id="flower-center"
+            cx="321.45"
+            cy="171.45"
+            r="21.45"
+            fill="#ffd45c"/>
+
+    </g>
+
+</svg>
+
+</div>
 
 </body>
-
 </html>
