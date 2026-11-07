@@ -19,6 +19,6 @@
     <line class="st1" x1="80" y1="320" x2="520" y2="320"/>
   </g>
   <g id="ball">
-    <circle id="ball1" data-name="ball" class="st0" cx="300" cy="100" r="40"/>
+    <ellipse id="ball1" data-name="ball" class="st0" cx="300" cy="100" rx="40" ry="40"/>
   </g>
 </svg>
