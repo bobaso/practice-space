@@ -13,6 +13,7 @@
 
    
 
+
 <script>
     fetch("ball.svg")
         .then(response => response.text())
@@ -24,52 +25,106 @@
 
             let startTime = null;
 
+            // バウンドの高さと時間
+            const bounces = [
+                { height: 110, duration: 650 },
+                { height: 70, duration: 550 },
+                { height: 40, duration: 450 },
+                { height: 20, duration: 380 }
+            ];
+
+            // 最初の落下時間
+            const fallDuration = 600;
+
+            // 地面に接触する位置
+            const groundY = 178;
+
+            // ボールの位置と形を更新
+            function updateBall(y, rx, ry) {
+                ball.setAttribute("cy", 100 + y + (40 - ry));
+                ball.setAttribute("rx", rx);
+                ball.setAttribute("ry", ry);
+            }
+
             function animate(timestamp) {
 
                 if (!startTime) {
                     startTime = timestamp;
                 }
 
-                const elapsed = (timestamp - startTime) % 1500;
-                const progress = elapsed / 1500;
+                const elapsed = timestamp - startTime;
 
                 let y = 0;
                 let rx = 40;
                 let ry = 40;
 
-                if (progress < 0.4) {
+                // 最初の落下
+                if (elapsed < fallDuration) {
 
-                    const t = progress / 0.4;
+                    const t = elapsed / fallDuration;
 
-                    y = 178 * t * t;
+                    y = groundY * t * t;
 
-                    if (progress > 0.32) {
-                        const squash = (progress - 0.32) / 0.08;
-
+                    if (t > 0.85) {
+                        const squash = (t - 0.85) / 0.15;
                         rx = 40 + 8 * squash;
                         ry = 40 - 10 * squash;
                     }
 
                 } else {
 
-                    const t = (progress - 0.4) / 0.6;
+                    // 落下後の経過時間
+                    let time = elapsed - fallDuration;
 
-                    y = 178 - 108 * (1 - (1 - t) * (1 - t));
+                    let currentBounce = null;
 
-                    if (progress < 0.5) {
-                        const stretch = 1 - (progress - 0.4) / 0.1;
+                    // 現在のバウンドを探す
+                    for (const bounce of bounces) {
 
-                        rx = 48 - 12 * stretch;
-                        ry = 30 + 18 * stretch;
+                        if (time < bounce.duration) {
+                            currentBounce = bounce;
+                            break;
+                        }
+
+                        time -= bounce.duration;
+                    }
+
+                    if (currentBounce) {
+
+                        const t = time / currentBounce.duration;
+
+                        y = groundY -
+                            currentBounce.height * 4 * t * (1 - t);
+
+                        // 着地の前後でつぶれる
+                        const impact = Math.max(
+                            0,
+                            1 - Math.min(t, 1 - t) / 0.12
+                        );
+
+                        rx = 40 + 8 * impact;
+                        ry = 40 - 10 * impact;
+
+                    } else {
+
+                        // 最後は地面で静止
+                        y = groundY;
+                        rx = 40;
+                        ry = 40;
                     }
                 }
 
-                // ボールの位置と形状を反映
-ball.setAttribute("cy", 100 + y + (40 - ry));
-ball.setAttribute("rx", rx);
-ball.setAttribute("ry", ry);
+                updateBall(y, rx, ry);
 
-                requestAnimationFrame(animate);
+                // 全てのバウンドが終わったら停止
+                const totalDuration = fallDuration +
+                    bounces.reduce((sum, bounce) => {
+                        return sum + bounce.duration;
+                    }, 0);
+
+                if (elapsed < totalDuration) {
+                    requestAnimationFrame(animate);
+                }
             }
 
             requestAnimationFrame(animate);
