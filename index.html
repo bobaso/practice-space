@@ -12,6 +12,7 @@
     <div id="animation-area"></div>
 
    
+
 <script>
     fetch("ball.svg")
         .then(response => response.text())
@@ -33,16 +34,39 @@
                 const progress = elapsed / 1500;
 
                 let y = 0;
+                let rx = 40;
+                let ry = 40;
 
                 if (progress < 0.4) {
+
                     const t = progress / 0.4;
+
                     y = 178 * t * t;
+
+                    if (progress > 0.32) {
+                        const squash = (progress - 0.32) / 0.08;
+
+                        rx = 40 + 8 * squash;
+                        ry = 40 - 10 * squash;
+                    }
+
                 } else {
+
                     const t = (progress - 0.4) / 0.6;
+
                     y = 178 - 108 * (1 - (1 - t) * (1 - t));
+
+                    if (progress < 0.5) {
+                        const stretch = 1 - (progress - 0.4) / 0.1;
+
+                        rx = 48 - 12 * stretch;
+                        ry = 30 + 18 * stretch;
+                    }
                 }
 
                 ball.setAttribute("cy", 100 + y);
+                ball.setAttribute("rx", rx);
+                ball.setAttribute("ry", ry);
 
                 requestAnimationFrame(animate);
             }
@@ -50,6 +74,7 @@
             requestAnimationFrame(animate);
         });
 </script>
+
 
 
 </body>
