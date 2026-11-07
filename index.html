@@ -64,9 +64,10 @@
                     }
                 }
 
-                ball.setAttribute("cy", 100 + y);
-                ball.setAttribute("rx", rx);
-                ball.setAttribute("ry", ry);
+                // ボールの位置と形状を反映
+ball.setAttribute("cy", 100 + y + (40 - ry));
+ball.setAttribute("rx", rx);
+ball.setAttribute("ry", ry);
 
                 requestAnimationFrame(animate);
             }
